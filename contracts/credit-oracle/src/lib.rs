@@ -2530,6 +2530,40 @@ mod tests {
     }
 
     #[test]
+    fn test_list_feeders_empty_index_returns_empty_vec() {
+        let env = Env::default();
+        env.mock_all_auths();
+        let contract_id = env.register_contract(None, CreditOracle);
+        let client = CreditOracleClient::new(&env, &contract_id);
+
+        let admin = Address::generate(&env);
+        client.initialize(&admin);
+
+        // No feeder ever registered -> FeedersIndex unset -> empty Vec.
+        assert_eq!(
+            client.list_feeders(),
+            Vec::<Address>::new(&env)
+        );
+    }
+
+    #[test]
+    fn test_list_lenders_empty_index_returns_empty_vec() {
+        let env = Env::default();
+        env.mock_all_auths();
+        let contract_id = env.register_contract(None, CreditOracle);
+        let client = CreditOracleClient::new(&env, &contract_id);
+
+        let admin = Address::generate(&env);
+        client.initialize(&admin);
+
+        // No lender ever registered -> LendersIndex unset -> empty Vec.
+        assert_eq!(
+            client.list_lenders(),
+            Vec::<Address>::new(&env)
+        );
+    }
+
+    #[test]
     fn test_reregistering_deregistered_feeder_does_not_duplicate_index() {
         let env = Env::default();
         env.mock_all_auths();
