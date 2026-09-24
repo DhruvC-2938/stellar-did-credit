@@ -2753,12 +2753,19 @@ describe("parseContractErrorCode", () => {
     ).toThrow(new GovernanceError(19, "InvalidVotingPeriod (code 19)"));
   });
 
+  it("maps InvalidAmount credit-oracle errors to their variant name", () => {
+    expect(() =>
+      throwContractError("Error(Contract, #17)", "credit-oracle"),
+    ).toThrow(new CreditOracleError(17, "InvalidAmount (code 17)"));
+  });
+
   it("maps InvalidIssuerTier identity-oracle errors to their variant name", () => {
     expect(() =>
       throwContractError("Error(Contract, #11)", "identity-oracle"),
     ).toThrow(new IdentityOracleError(11, "InvalidIssuerTier (code 11)"));
   });
 });
+
 
 describe("batchRevokeVC", () => {
   beforeEach(() => {
