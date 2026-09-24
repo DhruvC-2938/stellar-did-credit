@@ -133,7 +133,7 @@ The `identity-oracle`, `credit-oracle`, and `revocation-registry` contracts emit
 
 #### ProposalCancelled
 * **Topic:** `[Symbol("PropCanc"), proposal_id: u64]`
-* **Data:** `(canceller: Address, reason: Option<String>)`
+* **Data:** `canceller: Address`
 * **Emitted When:** A governance proposal is cancelled.
 
 ---
